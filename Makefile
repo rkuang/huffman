@@ -1,5 +1,5 @@
 CPP = g++
-FLAGS = -g
+FLAGS = 
 
 frequencies: frequencies.cpp
 	$(CPP) $(FLAGS) -o $@ $^
