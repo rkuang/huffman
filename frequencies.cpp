@@ -6,7 +6,7 @@ using namespace std;
 int main() {
   string line;
   map <int, int> frequencies;
-  while (getline(std::cin, line)) {
+  while (getline(cin, line)) {
     for (int i=0; i<line.length(); i++) {
       frequencies[line[i]]++;
     }
