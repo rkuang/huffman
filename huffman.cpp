@@ -5,28 +5,35 @@
 using namespace std;
 
 int main() {
-  // FrequencyCell* cell = new FrequencyCell('a', 40);
-  // TreeNode* root = new TreeNode(cell);
 
-  // cout  << cell->character << '\t' << cell->frequency << endl
-  //       << root->val->character << '\t'<< root->val->frequency << endl
-  //       << root->left << '\t' << root->right << endl;
-
-  priority_queue<FrequencyCell, vector<FrequencyCell>, FrequencyComparator> min_heap;
+  priority_queue<TreeNode*, vector<TreeNode*>, TreeNodeComparator> min_heap;
 
   int ch, fr;
   while (cin >> ch >> fr) {
-    // cout << ch << '\t' << fr << endl;
-    // FrequencyCell* cell = new FrequencyCell(ch, fr);
-    min_heap.push(FrequencyCell(ch, fr));
+    min_heap.push(new TreeNode(ch, fr));
   }
 
-  while (min_heap.empty() == false)
-    {
-        FrequencyCell fc = min_heap.top();
-        cout << fc.character << '\t' << fc.frequency << endl;
-        min_heap.pop();
-    }
+  // while (!min_heap.empty()) {
+  //   TreeNode *z = min_heap.top();
+  //   cout << z->character << '\t' << z->frequency << endl;
+  //   min_heap.pop();
+  // }
+
+  TreeNode* root;
+  while (min_heap.size() > 1) {
+    TreeNode* x = min_heap.top();
+    min_heap.pop();
+    TreeNode* y = min_heap.top();
+    min_heap.pop();
+
+    root = new TreeNode(-42, x->frequency + y->frequency);
+    root->left = x;
+    root->right = y;
+
+    min_heap.push(root);
+  }
+
+  generateCodeWords(root, "");
 
   return 0;
 }

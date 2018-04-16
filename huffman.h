@@ -1,50 +1,49 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
-class FrequencyCell {
+#include <fstream>
+
+using namespace std;
+
+class TreeNode {
   public:
     int character;
     int frequency;
+    TreeNode *left;
+    TreeNode *right;
 
-    FrequencyCell();
-    FrequencyCell(int _character, int _frequency);
+    TreeNode(int _character, int _frequency);
 };
 
-struct FrequencyComparator {
-  bool operator() (const FrequencyCell &f1, const FrequencyCell &f2) const {
-    if (f1.frequency > f2.frequency) {
+struct TreeNodeComparator {
+  bool operator() (const TreeNode *left_side, const TreeNode *right_side) const {
+    if (left_side->frequency > right_side->frequency) {
       return true;
-    } else if (f1.frequency == f2.frequency) {
-      return f1.character > f2.character;
+    } else if (left_side->frequency == right_side->frequency) {
+      return left_side->character > right_side->character;
     } else {
       return false;
     }
   };
 };
 
-class TreeNode {
-  public:
-    FrequencyCell val;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode(FrequencyCell _val);
-};
-
-
-FrequencyCell::FrequencyCell() {
-  // required default constructor
-}
-
-FrequencyCell::FrequencyCell(int _character, int _frequency) {
+TreeNode::TreeNode(int _character, int _frequency) {
   character = _character;
   frequency = _frequency;
-}
-
-TreeNode::TreeNode(FrequencyCell _val) {
-  val = _val;
   left = nullptr;
   right = nullptr;
+}
+
+void generateCodeWords(TreeNode* root, string code) {
+  if (!root->left && !root->right) {
+    cout << root->character << '\t' << code << endl;
+  }
+  if (root->left) {
+    generateCodeWords(root->left, code + "0");
+  }
+  if (root->right) {
+    generateCodeWords(root->right, code + "1");
+  }
 }
 
 #endif
