@@ -1,8 +1,6 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
-#include <fstream>
-
 using namespace std;
 
 class TreeNode {
@@ -34,16 +32,10 @@ TreeNode::TreeNode(int _character, int _frequency) {
   right = nullptr;
 }
 
-void generateCodeWords(TreeNode* root, string code) {
-  if (!root->left && !root->right) {
-    cout << root->character << '\t' << code << endl;
-  }
-  if (root->left) {
-    generateCodeWords(root->left, code + "0");
-  }
-  if (root->right) {
-    generateCodeWords(root->right, code + "1");
-  }
-}
+void generateCodeWords(TreeNode* root);
+
+void generateCodeWords(TreeNode* root, string code, int* sum_ptr, ofstream* file);
+
+void deleteTree(TreeNode* root);
 
 #endif

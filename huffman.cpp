@@ -1,8 +1,41 @@
 #include <iostream>
+#include <fstream>
 #include <queue>
 #include "huffman.h"
 
 using namespace std;
+
+void generateCodeWords(TreeNode* root) {
+  int sum = 0;
+  int* sum_ptr = &sum;
+  ofstream codewords_txt("codewords.txt");
+  ofstream* file = &codewords_txt;
+  generateCodeWords(root, "", sum_ptr, file);
+  cout << sum << endl;
+}
+
+void generateCodeWords(TreeNode* root, string code, int* sum_ptr, ofstream* file) {
+  if (!root->left && !root->right) {
+    *file << root->character << '\t' << code << endl;
+    *sum_ptr += code.length()*root->frequency;
+  }
+  if (root->left) {
+    generateCodeWords(root->left, code + "0", sum_ptr, file);
+  }
+  if (root->right) {
+    generateCodeWords(root->right, code + "1", sum_ptr, file);
+  }
+}
+
+void deleteTree(TreeNode* root)
+{
+  if (!root) return;
+
+  deleteTree(root->left);
+  deleteTree(root->right);
+
+  delete root;
+}
 
 int main() {
 
@@ -33,7 +66,9 @@ int main() {
     min_heap.push(root);
   }
 
-  generateCodeWords(root, "");
+  generateCodeWords(root);
+
+  deleteTree(root);
 
   return 0;
 }
