@@ -4,13 +4,10 @@
 using namespace std;
 
 int main() {
-  string line;
+  char ch;
   map <int, int> frequencies;
-  while (getline(cin, line)) {
-    for (int i=0; i<line.length(); i++) {
-      frequencies[line[i]]++;
-    }
-    frequencies['\n']++;
+  while (cin.get(ch)) {
+    frequencies[ch]++;
   }
 
   map <int, int> :: iterator itr;
