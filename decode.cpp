@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <bitset>
 
 using namespace std;
 
@@ -28,16 +29,21 @@ int main(int argc, char const *argv[]) {
     codewords[code] = ch;
   }
 
+  // map <string, string> :: iterator itr;
+  // for (itr = codewords.begin(); itr != codewords.end(); itr++) {
+  //   cout  << itr->first << '\t' << itr->second << endl;
+  // }
+
   // Read stdin
   // Read character by character, appending to a current code variable
   // While reading, check map. If key is found, decode to value.
-  string line;
-  while (getline(cin, line)) {
-    code = "";
-    for (int i=0; i<line.length(); i++) {
-      // cout << line[i] << endl;
-      code += line[i];
-      // cout << code << endl;
+  char c;
+  string bits;
+  code = "";
+  while (cin.get(c)) {
+    bits = bitset<8>(c).to_string();   // 11010000
+    for (int i=0; i<8; i++) {
+      code += bits[i];
       if (codewords.find(code) != codewords.end()) {
         cout << (char)stoi(codewords[code]);
         code = "";

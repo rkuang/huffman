@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <bitset>
 
 using namespace std;
 
@@ -35,12 +36,27 @@ int main(int argc, char const *argv[]) {
 
   // Read stdin
   // Convert chars to ASCII values, find character in map, print code to stdout
-  string line;
-  while (getline(cin, line)) {
-    for (int i=0; i<line.length(); i++) {
-      cout << codewords[to_string((int)line[i])];
+  char c;
+  bitset<8> my_char;
+  int head = 0;
+  while (cin.get(c)) {
+    code = codewords[to_string((int)c)];
+    for (int i=0; i<code.length(); i++) {
+      // cout << code[i];
+      my_char.set(7 - head, code[i] - 48);
+      head = (head + 1) % 8;
+      if (head == 0) {
+        // cout << my_char;
+        cout << (char)my_char.to_ulong();
+      }
     }
-    cout << codewords[to_string((int)'\n')];
+  }
+  if (head != 0) {
+    for (int j = head; j < 8; j++) {
+      my_char.set(7 - j, 1);
+    }
+    // cout << my_char;
+    cout << (char)my_char.to_ulong();
   }
 
   return 0;

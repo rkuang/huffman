@@ -53,17 +53,25 @@ int main() {
   // }
 
   TreeNode* root;
-  while (min_heap.size() > 1) {
+  if (min_heap.size() == 1) {
     TreeNode* x = min_heap.top();
     min_heap.pop();
-    TreeNode* y = min_heap.top();
-    min_heap.pop();
 
-    root = new TreeNode(-42, x->frequency + y->frequency);
+    root = new TreeNode(-42, x->frequency);
     root->left = x;
-    root->right = y;
+  } else {
+    while (min_heap.size() > 1) {
+      TreeNode* x = min_heap.top();
+      min_heap.pop();
+      TreeNode* y = min_heap.top();
+      min_heap.pop();
 
-    min_heap.push(root);
+      root = new TreeNode(-42, x->frequency + y->frequency);
+      root->left = x;
+      root->right = y;
+
+      min_heap.push(root);
+    }
   }
 
   generateCodeWords(root);
