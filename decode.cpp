@@ -37,21 +37,11 @@ int main(int argc, char const *argv[]) {
   // Read stdin
   // Read character by character, appending to a current code variable
   // While reading, check map. If key is found, decode to value.
-  char c;
-  string bits;
-  code = "";
-  // while (cin.get(c)) {
-  //   bits = bitset<8>(c).to_string();   // 11010000
-  //   for (int i=0; i<8; i++) {
-  //     code += bits[i];
-  //     if (codewords.find(code) != codewords.end()) {
-  //       cout << (char)stoi(codewords[code]);
-  //       code = "";
-  //     }
-  //   }
-  // }
 
   char buf1, buf2, buf3;
+  string bits;
+  code = "";
+  
   cin.get(buf1);
   cin.get(buf2);
   while (cin.get(buf3)) {
