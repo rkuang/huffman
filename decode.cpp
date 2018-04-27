@@ -40,14 +40,30 @@ int main(int argc, char const *argv[]) {
   char c;
   string bits;
   code = "";
-  while (cin.get(c)) {
-    bits = bitset<8>(c).to_string();   // 11010000
-    for (int i=0; i<8; i++) {
-      code += bits[i];
-      if (codewords.find(code) != codewords.end()) {
-        cout << (char)stoi(codewords[code]);
-        code = "";
-      }
+  // while (cin.get(c)) {
+  //   bits = bitset<8>(c).to_string();   // 11010000
+  //   for (int i=0; i<8; i++) {
+  //     code += bits[i];
+  //     if (codewords.find(code) != codewords.end()) {
+  //       cout << (char)stoi(codewords[code]);
+  //       code = "";
+  //     }
+  //   }
+  // }
+
+  char buf1, buf2, buf3;
+  cin.get(buf1);
+  cin.get(buf2);
+  while (cin.get(buf3)) {
+
+  }
+  bits = bitset<8>(buf1).to_string();
+  int padding = bitset<8>(buf2).to_ulong();
+  for (int i=0; i < padding; i++) {
+    code += bits[i];
+    if (codewords.find(code) != codewords.end()) {
+      cout << (char)stoi(codewords[code]);
+      code = "";
     }
   }
 

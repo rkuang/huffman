@@ -59,7 +59,7 @@ int main(int argc, char const *argv[]) {
     cout << (char)my_char.to_ulong();
   }
 
-  bitset<8> padding (8-head);
+  bitset<8> padding (head);
   cout << (char) padding.to_ulong();
 
   return 0;
