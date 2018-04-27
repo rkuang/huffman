@@ -42,11 +42,9 @@ int main(int argc, char const *argv[]) {
   while (cin.get(c)) {
     code = codewords[to_string((int)c)];
     for (int i=0; i<code.length(); i++) {
-      // cout << code[i];
       my_char.set(7 - head, code[i] - 48);
       head = (head + 1) % 8;
       if (head == 0) {
-        // cout << my_char;
         cout << (char)my_char.to_ulong();
       }
     }
@@ -55,11 +53,10 @@ int main(int argc, char const *argv[]) {
     for (int j = head; j < 8; j++) {
       my_char.set(7 - j, 1);
     }
-    // cout << my_char;
     cout << (char)my_char.to_ulong();
   }
 
-  bitset<8> padding (8-head);
+  bitset<8> padding (head ? head : 8);
   cout << (char) padding.to_ulong();
 
   return 0;
